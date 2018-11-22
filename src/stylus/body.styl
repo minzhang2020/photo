@@ -1,0 +1,99 @@
+.main-layout
+  width: 1200px
+  margin: 110px auto 0
+
+  &-leftside
+    width: 272px
+    float: left
+
+  &-rightside
+    width: 900px
+    float: right
+
+.menu-box
+  width: 270px
+  border: 1px solid #fff
+
+  &-header
+    height: 41px
+    padding-left: 22px
+    line-height: 41px
+
+    h2
+      font-size: 16px
+      font-weight: 400
+
+  &-body
+    padding: 10px 0
+
+.menu-item
+  &__title
+    height: 16px
+    width: 242px
+    margin: 0 8px
+    padding: 10px 0 10px 12px
+    line-height: 16px
+    overflow: hidden
+
+    &--first
+      border-top: none !important
+
+  &__list
+    display: none
+    margin: 0 5px 0 13px
+
+    &-item
+      float: left
+      padding: 0 5px
+      height: 21px
+      line-height: 21px
+      border-radius: 2px
+      white-space: nowrap
+
+      &:hover
+        color: #fff
+
+.menu-item-hover
+  .menu-item__list
+    display: block
+    padding-bottom: 5px
+
+.design-box
+  border-color: #fad5e8
+
+  .menu-box-header
+    background-color: #f8e1ed
+
+    h2
+      color: #AE025D
+
+  .menu-box-body
+    background-color: #fcf1f7
+
+  .menu-item__title
+    border-top: 1px solid #f1d7e5
+
+  .menu-item__list-item:hover
+    background-color: #f0419b
+
+.photo-box, .media-box
+  border-color: #c1e0f9
+
+  .menu-box-header
+    background-color: #d1e9fe
+
+    h2
+      color: #396699
+
+  .menu-box-body
+    background-color: #eaf5ff
+
+  .menu-item__title
+    border-top: 1px solid #c1e0f9
+
+  .menu-item__list-item:hover
+    background-color: #40a2f5
+
+.media-box
+  .menu-box-body
+    background-color: #f0f3f8

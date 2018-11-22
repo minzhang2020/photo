@@ -1,0 +1,30 @@
+extends layout.pug
+
+block title
+  title 摄影
+block maincontent
+  .main
+    .main-layout.clearfix
+      .main-layout-leftside
+        .menu-box.photo-box
+          .menu-box-header
+            h2 摄影图库
+          .menu-box-body
+            each item,index in menuList
+              dl.menu-item
+                dt.menu-item__title(class={'menu-item__title--first':index===0})
+                  strong= item.name
+                dd.menu-item__list.clearfix
+                  each citem in item.children
+                    a.menu-item__list-item(href="#",title=citem.name)= citem.name
+      .main-layout-rightside
+block scripts
+  script
+    . 
+      $(function(){
+          $('.menu-item').on('mouseenter',function(){
+              $(this).addClass('menu-item-hover')
+          }).on('mouseleave',function(){
+            $(this).removeClass('menu-item-hover')
+          })
+      })

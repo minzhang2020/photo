@@ -1,0 +1,25 @@
+doctype html
+html(lang="zh-CN")
+  head
+    meta(charset='utf-8')
+    meta(name='keywords',content='素材,图库,图片,图片下载,视频素材,设计素材,PSD,矢量,AI,CDR,EPS,ppt模板,设计')
+    meta(name='description',content='原创素材共享平台.图片素材图库提供海量原创素材,图片下载,摄影作品,设计素材,视频素材,ppt模板,PSD源文件,矢量图,AI,CDR,EPS等高清图片下载.')
+    block title
+      title 图片网
+    link(type='text/css' href='http://localhost:3000/css/main.css' rel='stylesheet')
+    
+  body
+    block header
+      .header
+        .header-nav(class={'header-nav-index':url==='/'})
+          .header-nav-bar 
+            .nav
+              - var list = [{name:'首页',url:'/'},{name:'设计',url:'/design'},{name:'摄影',url:'/photo'},{name:'多媒体',url:'/media'}]
+              each item in list
+                if item.url === url
+                  a.nav__item(class='nav__item--on',href=item.url)= item.name
+                else
+                  a.nav__item(href=item.url)= item.name
+    block maincontent
+    script(src='https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js')
+    block scripts
