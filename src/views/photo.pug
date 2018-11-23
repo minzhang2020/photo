@@ -16,15 +16,9 @@ block maincontent
                   strong= item.name
                 dd.menu-item__list.clearfix
                   each citem in item.children
-                    a.menu-item__list-item(href="#",title=citem.name)= citem.name
+                    a.menu-item__list-item(href="/list/"+citem.id,title=citem.name)= citem.name
       .main-layout-rightside
 block scripts
   script
-    . 
-      $(function(){
-          $('.menu-item').on('mouseenter',function(){
-              $(this).addClass('menu-item-hover')
-          }).on('mouseleave',function(){
-            $(this).removeClass('menu-item-hover')
-          })
-      })
+    include menu-hover.js
+    

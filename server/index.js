@@ -8,6 +8,20 @@ const router = require('./router')
 const path = require('path')
 const logger = require('./logger.js')('index')
 const cache = require('./cache')
+
+app.use(async (ctx, next) => {
+  logger.info(`${ctx.method} ${ctx.url}`)
+  await next()
+})
+
+// x-response-time
+
+app.use(async (ctx, next) => {
+  const start = Date.now()
+  await next()
+  const ms = Date.now() - start
+  logger.info(`${ctx.method} ${ctx.url} 耗时 ${ms}毫秒`)
+})
 //压缩
 app.use(
   koaCompress({

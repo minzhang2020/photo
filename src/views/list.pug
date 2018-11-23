@@ -1,0 +1,15 @@
+extends layout.pug
+
+block title
+  title 艺术图库
+block maincontent
+  .main
+    .main-layout
+      .list
+        each item in data.items
+          .list-item
+            .list-item__imgwrapper
+              img(src= item.url)
+            p.list-item__label= item.title
+
+

@@ -1,10 +1,11 @@
 const log4js = require('log4js')
 log4js.configure({
   appenders: {
-    everything: { type: 'file', filename: 'logs/photo.log', maxLogSize: 10485760, backups: 30 }
+    out: { type: 'stdout' },
+    fileout: { type: 'file', filename: 'logs/photo.log', maxLogSize: 10485760, backups: 30 }
   },
   categories: {
-    default: { appenders: ['everything'], level: 'debug' }
+    default: { appenders: ['out', 'fileout'], level: 'debug' }
   }
 })
 

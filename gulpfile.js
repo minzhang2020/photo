@@ -6,7 +6,7 @@ const revCollector = require('gulp-rev-collector')
 const del = require('del')
 const plumber = require('gulp-plumber')
 const cssSrc = 'src/stylus/*.styl'
-const tempSrc = 'src/views/*.pug'
+const tempSrc = 'src/views/*.*'
 
 gulp.task('stylus', function() {
   return gulp

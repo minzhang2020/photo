@@ -13,10 +13,7 @@ instance.interceptors.response.use(
         return resData
       }
     }
-    return {
-      retcode: -99999,
-      msg: '服务器异常'
-    }
+    return null
   },
   error => {
     if (error) {
@@ -29,5 +26,14 @@ module.exports = {
   async getCategories() {
     logger.info('获取categories')
     return instance.get('/material/categories')
+  },
+  async getImagesByCategoryId(id, pageIndex = 1, pageSize = 20) {
+    logger.info('material/pictures')
+    return instance.get('material/pictures/' + id, {
+      params: {
+        page: pageIndex,
+        per_page: pageSize
+      }
+    })
   }
 }
