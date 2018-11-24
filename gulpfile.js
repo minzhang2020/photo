@@ -5,9 +5,10 @@ const rev = require('gulp-rev')
 const revCollector = require('gulp-rev-collector')
 const del = require('del')
 const plumber = require('gulp-plumber')
+const uglify = require('gulp-uglify')
 const cssSrc = 'src/stylus/*.styl'
 const tempSrc = 'src/views/*.*'
-
+const jsSrc = 'src/js/*.js'
 gulp.task('stylus', function() {
   return gulp
     .src('src/stylus/main.styl')
@@ -24,27 +25,45 @@ gulp.task('stylus', function() {
         merge: true // Merge with the existing manifest if one exists
       })
     )
-    .pipe(gulp.dest('rev/'))
+    .pipe(gulp.dest('rev/css/'))
+})
+
+gulp.task('js', function() {
+  return (
+    gulp
+      .src(jsSrc)
+      // .pipe(uglify())
+      .pipe(rev())
+      .pipe(gulp.dest('./web/js'))
+      .pipe(
+        rev.manifest({
+          merge: true // Merge with the existing manifest if one exists
+        })
+      )
+      .pipe(gulp.dest('rev/js/'))
+  )
 })
 
 gulp.task('revTemp', function() {
   return gulp
-    .src(['rev/*.json', tempSrc])
+    .src(['rev/**/*.json', tempSrc])
     .pipe(revCollector())
     .pipe(gulp.dest('./web/views'))
 })
 gulp.task('build-clean', function() {
-  return del(['./web/css/*.*', './web/views/*.*'])
+  return del(['./web/css/*.*', './web/views/*.*', ',/web/js/*.*'])
 })
 
 gulp.task('watch', function() {
-  var watcher = gulp.watch([cssSrc, tempSrc])
+  var watcher = gulp.watch([cssSrc, tempSrc, jsSrc])
   watcher.on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...')
-    runSequence('build-clean', 'stylus', 'revTemp')
+    console.log(
+      'File ' + event.path + ' was ' + event.type + ', running tasks...'
+    )
+    runSequence('build-clean', 'stylus', 'js', 'revTemp')
   })
 })
 
 gulp.task('default', function(done) {
-  runSequence('build-clean', 'stylus', 'revTemp', done)
+  runSequence('build-clean', 'stylus', 'js', 'revTemp', done)
 })

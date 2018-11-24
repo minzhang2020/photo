@@ -1,4 +1,5 @@
 const services = require('./services.js')
+const logger = require('./logger')('cache')
 var LRU = require('lru-cache'),
   options = {
     max: 50,
@@ -11,6 +12,7 @@ async function getCategories() {
     let categories = await services.getCategories()
     let ret = parseCategory(categories)
     if (ret !== null) {
+      logger.info('获取categories成功')
       cache.set('category', ret)
     }
   } catch (error) {

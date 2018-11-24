@@ -2,14 +2,23 @@ extends layout.pug
 
 block title
   title 艺术图库
+block links 
+  link(type='text/css' href='https://cdn.staticfile.org/twitter-bootstrap/4.1.3/css/bootstrap.min.css' rel='stylesheet')
 block maincontent
   .main
     .main-layout
       .list
         each item in data.items
-          .list-item
+          a.list-item(href= item.url)
             .list-item__imgwrapper
               img(src= item.url)
             p.list-item__label= item.title
+      ul#pagination.pagination
+    input(type='hidden',id='totalServer',value=data.total )
+block outscripts
+  script(src="/js/pagination.js")
+block scripts
+  script
+    include pager.js
 
 

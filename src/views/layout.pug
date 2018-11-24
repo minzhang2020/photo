@@ -6,7 +6,8 @@ html(lang="zh-CN")
     meta(name='description',content='原创素材共享平台.图片素材图库提供海量原创素材,图片下载,摄影作品,设计素材,视频素材,ppt模板,PSD源文件,矢量图,AI,CDR,EPS等高清图片下载.')
     block title
       title 图片网
-    link(type='text/css' href='http://localhost:3000/css/main.css' rel='stylesheet')
+    block links
+    link(type='text/css' href='/css/main.css' rel='stylesheet')
     
   body
     block header
@@ -22,4 +23,5 @@ html(lang="zh-CN")
                   a.nav__item(href=item.url)= item.name
     block maincontent
     script(src='https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js')
+    block outscripts
     block scripts

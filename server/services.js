@@ -2,7 +2,7 @@ const axios = require('axios')
 const logger = require('./logger')('service')
 var instance = axios.create({
   baseURL: 'http://172.105.210.121:8880/api',
-  timeout: 1000
+  timeout: 30000
 })
 instance.interceptors.response.use(
   response => {
@@ -16,9 +16,6 @@ instance.interceptors.response.use(
     return null
   },
   error => {
-    if (error) {
-      console.log(error)
-    }
     return Promise.reject(error)
   }
 )

@@ -15,8 +15,8 @@ jQuery.fn.pagination = function(maxentries, opts) {
       current_page: 0,
       num_edge_entries: 0,
       link_to: '#',
-      prev_text: 'Prev',
-      next_text: 'Next',
+      prev_text: '上一页',
+      next_text: '下一页',
       ellipse_text: '...',
       prev_show_always: true,
       next_show_always: true,
@@ -42,8 +42,14 @@ jQuery.fn.pagination = function(maxentries, opts) {
       var ne_half = Math.ceil(opts.num_display_entries / 2)
       var np = numPages()
       var upper_limit = np - opts.num_display_entries
-      var start = current_page > ne_half ? Math.max(Math.min(current_page - ne_half, upper_limit), 0) : 0
-      var end = current_page > ne_half ? Math.min(current_page + ne_half, np) : Math.min(opts.num_display_entries, np)
+      var start =
+        current_page > ne_half
+          ? Math.max(Math.min(current_page - ne_half, upper_limit), 0)
+          : 0
+      var end =
+        current_page > ne_half
+          ? Math.min(current_page + ne_half, np)
+          : Math.min(opts.num_display_entries, np)
       return [start, end]
     }
 
@@ -79,13 +85,31 @@ jQuery.fn.pagination = function(maxentries, opts) {
         }
       }
       //辅助函数用来产生一个单链接(如果不是当前页则产生span标签)
-      var appendItem = function(page_id, appendopts) {
+      var appendItem = function(page_id, appendopts, disalbed) {
         page_id = page_id < 0 ? 0 : page_id < np ? page_id : np - 1 // 规范page id值
-        appendopts = jQuery.extend({ text: page_id + 1, classes: '' }, appendopts || {})
+        appendopts = jQuery.extend(
+          { text: page_id + 1, classes: '' },
+          appendopts || {}
+        )
         if (page_id == current_page) {
-          var lnk = jQuery("<span class='current'>" + appendopts.text + '</span>')
+          var lnk = jQuery(
+            '<li class="page-item active"><span class="page-link">' +
+              appendopts.text +
+              '</span></li>'
+          )
+          if (disalbed) {
+            var lnk = jQuery(
+              '<li class="page-item disabled"><span class="page-link">' +
+                appendopts.text +
+                '</span></li>'
+            )
+          }
         } else {
-          var lnk = jQuery('<a>' + appendopts.text + '</a>')
+          var lnk = jQuery(
+            '<li class="page-item"><a class="page-link">' +
+              appendopts.text +
+              '</a></li>'
+          )
             .bind('click', getClickHandler(page_id))
             .attr('href', opts.link_to.replace(/__id__/, page_id))
         }
@@ -96,7 +120,14 @@ jQuery.fn.pagination = function(maxentries, opts) {
       }
       // 产生"Previous"-链接
       if (opts.prev_text && (current_page > 0 || opts.prev_show_always)) {
-        appendItem(current_page - 1, { text: opts.prev_text, classes: 'prev' })
+        appendItem(
+          current_page - 1,
+          {
+            text: opts.prev_text,
+            classes: ''
+          },
+          current_page === 0
+        )
       }
       // 产生起始点
       if (interval[0] > 0 && opts.num_edge_entries > 0) {
@@ -124,7 +155,14 @@ jQuery.fn.pagination = function(maxentries, opts) {
       }
       // 产生 "Next"-链接
       if (opts.next_text && (current_page < np - 1 || opts.next_show_always)) {
-        appendItem(current_page + 1, { text: opts.next_text, classes: 'next' })
+        appendItem(
+          current_page + 1,
+          {
+            text: opts.next_text,
+            classes: ''
+          },
+          current_page === np - 1
+        )
       }
     }
 
@@ -132,7 +170,8 @@ jQuery.fn.pagination = function(maxentries, opts) {
     var current_page = opts.current_page
     //创建一个显示条数和每页显示条数值
     maxentries = !maxentries || maxentries < 0 ? 1 : maxentries
-    opts.items_per_page = !opts.items_per_page || opts.items_per_page < 0 ? 1 : opts.items_per_page
+    opts.items_per_page =
+      !opts.items_per_page || opts.items_per_page < 0 ? 1 : opts.items_per_page
     //存储DOM元素，以方便从所有的内部结构中获取
     var panel = jQuery(this)
     // 获得附加功能的元素
