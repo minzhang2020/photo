@@ -7,14 +7,28 @@ block links
 block maincontent
   .main
     .main-layout
+      ul.pagination.pagination-top.justify-content-end
+        li.page-item
+          a.page-link(href="javascript:void 0")
+            span= data.page 
+            span /
+            span= data.pages
+        li.page-item(class={'disabled':data.page===1})
+          a#prevPage.page-link(href='javascript:void 0')
+            span!= '&laquo;'
+        li.page-item(class={'disabled':data.page===data.pages})
+          a#nextPage.page-link(href='javascript:void 0')
+            span!= '&raquo;'
       .list
         each item in data.items
           a.list-item(href= item.url)
             .list-item__imgwrapper
               img(src= item.url)
             p.list-item__label= item.title
-      ul#pagination.pagination
-    input(type='hidden',id='totalServer',value=data.total )
+      ul#pagination.pagination.justify-content-center
+    input(type='hidden',id='total',value=data.total )
+    input(type='hidden', id='currentPageIndex',value=data.page)
+    input(type='hidden', id='pageTotal',value=data.pages)
 block outscripts
   script(src="/js/pagination.js")
 block scripts

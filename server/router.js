@@ -39,7 +39,8 @@ router.get('/media', async (ctx, next) => {
 
 router.get('/list/:id', async (ctx, next) => {
   if (ctx.params.id) {
-    let data = await services.getImagesByCategoryId(ctx.params.id)
+    let pageIndex = ctx.request.query.page || 1
+    let data = await services.getImagesByCategoryId(ctx.params.id, pageIndex)
     if (data !== null) {
       return await ctx.render('list', {
         data
