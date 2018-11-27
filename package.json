@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "watch": "gulp watch",
-    "dev": "node server/index.js"
+    "dev": "node server/index.js",
+    "build": "gulp",
+    "start": "pm2 starat server/index.js"
   },
   "devDependencies": {
     "del": "^3.0.0",

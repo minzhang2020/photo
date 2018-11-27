@@ -21,14 +21,14 @@ block maincontent
             span!= '&raquo;'
       .list
         each item in data.items
-          a.list-item(href= item.url)
+          a.list-item(href= item.path)
             .list-item__imgwrapper
-              img(src= item.url)
+              img(src= item.path)
             p.list-item__label= item.title
       ul#pagination.pagination.justify-content-center
-    input(type='hidden',id='total',value=data.total )
-    input(type='hidden', id='currentPageIndex',value=data.page)
-    input(type='hidden', id='pageTotal',value=data.pages)
+    input(id='total',type='hidden',value=data.total)
+    input(id='currentPageIndex', type='hidden', value=data.page)
+    input(id='pageTotal', type='hidden', value=data.pages)
 block outscripts
   script(src="/js/pagination.js")
 block scripts
