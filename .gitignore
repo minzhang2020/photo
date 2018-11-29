@@ -5,3 +5,4 @@ logs
 web
 .vscode
 dist
+*.tar
