@@ -7,7 +7,7 @@
     "watch": "gulp watch",
     "dev": "node server/index.js",
     "build": "gulp",
-    "start": "pm2 starat server/index.js"
+    "start": "pm2 start server/index.js"
   },
   "devDependencies": {
     "del": "^3.0.0",
